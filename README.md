@@ -14,7 +14,7 @@ Android library for simple login with Google, Facebook, Twitter.
 Add library dependency to your build.gradle:
 ```groovy
 repositories {
-  jcenter()
+  maven { url  "https://dl.bintray.com/cadabra-studio/libs" }
 }
 ...
 dependencies {
