@@ -1,4 +1,5 @@
 # SocialLogin
+[ ![Download](https://api.bintray.com/packages/cadabrastudio/libs/sociallogin/images/download.svg) ](https://bintray.com/cadabrastudio/libs/sociallogin/_latestVersion)
 
 Android library for simple login with Google, Facebook, Twitter.
 
@@ -13,7 +14,9 @@ Android library for simple login with Google, Facebook, Twitter.
 Add library dependency to your build.gradle:
 ```groovy
 repositories {
-  jcenter()
+  maven {
+      url  "https://cadabrastudio.bintray.com/libs"
+  }
 }
 ...
 dependencies {
