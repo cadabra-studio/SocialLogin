@@ -1,17 +1,19 @@
-package com.cadabra.sociallogin
+package com.cadabra.sociallogin.simple
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.cadabra.sociallogin.SocialLogin
 import com.twitter.sdk.android.core.TwitterAuthToken
-import kotlinx.android.synthetic.main.activity_standard_view.*
+import io.reactivex.disposables.Disposable
+import kotlinx.android.synthetic.main.activity_custom_view.*
 
-class StandardViewListenersActivity : AppCompatActivity() {
-
+class CustomViewRxActivity : AppCompatActivity() {
+    private val disposableList = mutableListOf<Disposable>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_standard_view)
+        setContentView(R.layout.activity_custom_view)
 
         checkIsAuthorized()
         setListeners()
@@ -29,35 +31,17 @@ class StandardViewListenersActivity : AppCompatActivity() {
     }
 
     private fun setListeners() {
-        SocialLogin.setGoogleListener(this, googleButton, object : LoginListener<String> {
-            override fun onSuccess(token: String) {
-                authorizeGoogle(token)
-            }
+        val googleDisposable = SocialLogin.setRxGoogleListener(this, googleCustom)
+            .subscribe(::authorizeGoogle, ::failGoogle)
+        disposableList.add(googleDisposable)
 
-            override fun onError(throwable: Throwable) {
-                failGoogle(throwable)
-            }
-        })
+        val facebookDisposable = SocialLogin.setRxFacebookListener(this, facebookCustom)
+            .subscribe(::authorizeFacebook, ::failFacebook)
+        disposableList.add(facebookDisposable)
 
-        SocialLogin.setFacebookListener(facebookButton, object : LoginListener<String> {
-            override fun onSuccess(token: String) {
-                authorizeFacebook(token)
-            }
-
-            override fun onError(throwable: Throwable) {
-                failFacebook(throwable)
-            }
-        })
-
-        SocialLogin.setTwitterListener(twitterButton, object : LoginListener<TwitterAuthToken> {
-            override fun onSuccess(token: TwitterAuthToken) {
-                authorizeTwitter(token)
-            }
-
-            override fun onError(throwable: Throwable) {
-                failTwitter(throwable)
-            }
-        })
+        val twitterDisposable = SocialLogin.setRxTwitterListener(this, twitterCustom)
+            .subscribe(::authorizeTwitter, ::failTwitter)
+        disposableList.add(twitterDisposable)
     }
 
     private fun failTwitter(it: Throwable) {
@@ -101,5 +85,13 @@ class StandardViewListenersActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         SocialLogin.checkResult(requestCode, resultCode, data)
+    }
+
+    override fun onDestroy() {
+        disposableList.forEach {
+            if (!it.isDisposed)
+                it.dispose()
+        }
+        super.onDestroy()
     }
 }

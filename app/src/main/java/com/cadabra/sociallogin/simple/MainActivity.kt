@@ -1,4 +1,4 @@
-package com.cadabra.sociallogin
+package com.cadabra.sociallogin.simple
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity

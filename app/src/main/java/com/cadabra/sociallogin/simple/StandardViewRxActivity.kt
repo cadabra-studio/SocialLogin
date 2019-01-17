@@ -1,18 +1,19 @@
-package com.cadabra.sociallogin
+package com.cadabra.sociallogin.simple
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.cadabra.sociallogin.SocialLogin
 import com.twitter.sdk.android.core.TwitterAuthToken
 import io.reactivex.disposables.Disposable
-import kotlinx.android.synthetic.main.activity_custom_view.*
+import kotlinx.android.synthetic.main.activity_standard_view.*
 
-class CustomViewRxActivity : AppCompatActivity() {
+class StandardViewRxActivity : AppCompatActivity() {
     private val disposableList = mutableListOf<Disposable>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_custom_view)
+        setContentView(R.layout.activity_standard_view)
 
         checkIsAuthorized()
         setListeners()
@@ -30,15 +31,15 @@ class CustomViewRxActivity : AppCompatActivity() {
     }
 
     private fun setListeners() {
-        val googleDisposable = SocialLogin.setRxGoogleListener(this, googleCustom)
+        val googleDisposable = SocialLogin.setRxGoogleListener(this, googleButton)
             .subscribe(::authorizeGoogle, ::failGoogle)
         disposableList.add(googleDisposable)
 
-        val facebookDisposable = SocialLogin.setRxFacebookListener(this, facebookCustom)
+        val facebookDisposable = SocialLogin.setRxFacebookListener(facebookButton)
             .subscribe(::authorizeFacebook, ::failFacebook)
         disposableList.add(facebookDisposable)
 
-        val twitterDisposable = SocialLogin.setRxTwitterListener(this, twitterCustom)
+        val twitterDisposable = SocialLogin.setRxTwitterListener(twitterButton)
             .subscribe(::authorizeTwitter, ::failTwitter)
         disposableList.add(twitterDisposable)
     }

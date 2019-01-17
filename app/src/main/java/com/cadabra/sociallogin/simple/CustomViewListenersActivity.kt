@@ -1,9 +1,11 @@
-package com.cadabra.sociallogin
+package com.cadabra.sociallogin.simple
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.cadabra.sociallogin.LoginListener
+import com.cadabra.sociallogin.SocialLogin
 import com.twitter.sdk.android.core.TwitterAuthToken
 import kotlinx.android.synthetic.main.activity_custom_view.*
 
@@ -29,35 +31,44 @@ class CustomViewListenersActivity : AppCompatActivity() {
     }
 
     private fun setListeners() {
-        SocialLogin.setGoogleListener(this, googleCustom, object : LoginListener<String> {
-            override fun onSuccess(token: String) {
-                authorizeGoogle(token)
-            }
+        SocialLogin.setGoogleListener(
+            this,
+            googleCustom,
+            object : LoginListener<String> {
+                override fun onSuccess(token: String) {
+                    authorizeGoogle(token)
+                }
 
-            override fun onError(throwable: Throwable) {
-                failGoogle(throwable)
-            }
-        })
+                override fun onError(throwable: Throwable) {
+                    failGoogle(throwable)
+                }
+            })
 
-        SocialLogin.setFacebookListener(this, facebookCustom, object : LoginListener<String> {
-            override fun onSuccess(token: String) {
-                authorizeFacebook(token)
-            }
+        SocialLogin.setFacebookListener(
+            this,
+            facebookCustom,
+            object : LoginListener<String> {
+                override fun onSuccess(token: String) {
+                    authorizeFacebook(token)
+                }
 
-            override fun onError(throwable: Throwable) {
-                failFacebook(throwable)
-            }
-        })
+                override fun onError(throwable: Throwable) {
+                    failFacebook(throwable)
+                }
+            })
 
-        SocialLogin.setTwitterListener(this, twitterCustom, object : LoginListener<TwitterAuthToken> {
-            override fun onSuccess(token: TwitterAuthToken) {
-                authorizeTwitter(token)
-            }
+        SocialLogin.setTwitterListener(
+            this,
+            twitterCustom,
+            object : LoginListener<TwitterAuthToken> {
+                override fun onSuccess(token: TwitterAuthToken) {
+                    authorizeTwitter(token)
+                }
 
-            override fun onError(throwable: Throwable) {
-                failTwitter(throwable)
-            }
-        })
+                override fun onError(throwable: Throwable) {
+                    failTwitter(throwable)
+                }
+            })
     }
 
     private fun failTwitter(it: Throwable) {
