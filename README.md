@@ -20,7 +20,7 @@ repositories {
 }
 ...
 dependencies {
-  implementation 'com.cadabrastudio:sociallogin:0.1.0@aar'
+  implementation 'com.cadabrastudio:sociallogin:1.0.0'
   implementation 'com.facebook.android:facebook-login:[4,5)'
   implementation('com.twitter.sdk.android:twitter:3.3.0@aar') {
       transitive = true
