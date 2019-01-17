@@ -10,7 +10,7 @@ publish {
     def publishVersionID = '1.0.0'
 
     userOrg = 'cadabrastudio'
-    repoName = 'SocialLogin'
+    repoName = 'libs'
     groupId = groupProjectID
     artifactId = artifactProjectID
     publishVersion = publishVersionID
