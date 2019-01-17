@@ -1,0 +1,47 @@
+apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
+
+publish {
+
+    def groupProjectID = 'com.cadabrastudio'
+    def artifactProjectID = 'sociallogin'
+    def publishVersionID = '1.0.0'
+
+    userOrg = 'cadabrastudio'
+    repoName = 'SocialLogin'
+    groupId = groupProjectID
+    artifactId = artifactProjectID
+    publishVersion = publishVersionID
+    desc = 'Android library for simple login with Google, Facebook, Twitter.'
+    website = 'https://github.com/cadabra-studio/SocialLogin'
+}
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.facebook.android:facebook-login:[4,5)'
+    implementation('com.twitter.sdk.android:twitter:3.3.0@aar') {
+        transitive = true
+    }
+    implementation 'com.google.android.gms:play-services-auth:16.0.1'
+    api 'io.reactivex.rxjava2:rxjava:2.2.2'
+}

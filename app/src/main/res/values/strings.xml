@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">SocialLogin</string>
+
+    <string name="custom_view_listeners">Custom View Listeners</string>
+    <string name="custom_view_rxjava">Custom View RxJava</string>
+    <string name="standard_view_listeners">Standard View Listeners</string>
+    <string name="standard_view_rxjava">Standard View RxJava</string>
+
+    <string name="twitter_login_status">Twitter login status:</string>
+    <string name="google_login_status">Google login status:</string>
+    <string name="facebook_login_status">Facebook login status:</string>
+    <string name="login_with_google">Login with Google</string>
+    <string name="login_with_facebook">Login with Facebook</string>
+    <string name="login_with_twitter">Login with Twitter</string>
+    <string name="logout_with_google">Logout from Google</string>
+    <string name="logout_with_facebook">Logout from Facebook</string>
+    <string name="logout_with_twitter">Logout from Twitter</string>
+    <string name="token">Token:</string>
+    <string name="secret">Secret:</string>
+
+    <string name="success">success</string>
+    <string name="fail">fail</string>
+
+    <!-- Social keys -->
+    <string name="app_facebook_id">app_facebook_id</string>
+    <string name="google_server_client_id">google_server_client_id</string>
+    <string name="twitter_key">twitter_key</string>
+    <string name="twitter_secret">twitter_secret</string>
+
+</resources>
